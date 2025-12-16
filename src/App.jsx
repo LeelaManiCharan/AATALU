@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import GameCard from "./components/GameCard"
 import BurgerStash from "./games/BurgerStash"
 import PizzaRush from "./games/PizzaRush"
+import CatSling from "./games/CatSling"
 
 export default function App() {
   const [screen, setScreen] = useState("home")
@@ -28,7 +29,11 @@ export default function App() {
     return <PizzaRush goHome={() => setScreen("home")} />
   }
 
-  /* HOME */
+  if (screen === "cat") {
+    return <CatSling goHome={() => setScreen("home")} />
+  }
+
+  /* HOME SCREEN */
   return (
     <div className="home">
       <h1>🎮 AATALU</h1>
@@ -45,8 +50,17 @@ export default function App() {
           onClick={() => setScreen("pizza")}
         />
 
-        <GameCard title="Game 3" />
+        <GameCard
+          title="🐱 Cat Sling"
+          onClick={() => setScreen("cat")}
+        />
+
         <GameCard title="Game 4" />
+      </div>
+
+      {/* FOOTER */}
+      <div className="footer">
+        Made with 🤍 from Vijayawada
       </div>
     </div>
   )

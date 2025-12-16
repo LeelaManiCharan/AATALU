@@ -260,8 +260,15 @@ body {
     justify-content: center;
     font-size: 16px;
 }
+
+
 /* pizza */
+
+
+/* 🍕 PIZZA RUSH */
+
 .pizza-wrapper {
+    position: relative;
     min-height: calc(var(--vh, 1vh) * 100);
     background: white;
     color: black;
@@ -271,8 +278,17 @@ body {
     padding: 16px;
 }
 
-body {
+.back-btn {
+    position: absolute;
+    top: 12px;
+    left: 12px;
     background: white;
+    color: black;
+    border: 2px solid black;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 10;
 }
 
 .hud {
@@ -280,6 +296,7 @@ body {
     display: flex;
     justify-content: space-between;
     font-size: 18px;
+    margin-top: 32px;
 }
 
 .pizza {

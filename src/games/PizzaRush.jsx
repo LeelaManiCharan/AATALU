@@ -25,7 +25,7 @@ export default function PizzaRush({ goHome }) {
   const [target, setTarget] = useState(randomPizza())
   const [current, setCurrent] = useState([])
 
-  const [timer, setTimer] = useState(15)
+  const [timer, setTimer] = useState(20)
   const [wrong, setWrong] = useState(0)
 
   const [gameOver, setGameOver] = useState(false)
@@ -39,15 +39,17 @@ export default function PizzaRush({ goHome }) {
       return
     }
 
-    const t = setInterval(() => {
-      setTimer(v => v - 1)
+    const interval = setInterval(() => {
+      setTimer(t => t - 1)
     }, 1000)
 
-    return () => clearInterval(t)
+    return () => clearInterval(interval)
   }, [timer, gameOver, win])
 
+  /* ADD TOPPING */
   function addTopping(key) {
     if (gameOver || win) return
+
     setCurrent(prev => [...prev, key])
 
     if (!target.includes(key)) {
@@ -58,11 +60,12 @@ export default function PizzaRush({ goHome }) {
     }
   }
 
+  /* SEND PIZZA */
   function sendPizza() {
     if (gameOver || win) return
 
-    const correctCount = current.filter(t => target.includes(t)).length
-    if (correctCount !== target.length) {
+    const correct = current.filter(t => target.includes(t)).length
+    if (correct !== target.length) {
       setWrong(w => {
         if (w + 1 >= 3) setGameOver(true)
         return w + 1
@@ -77,7 +80,7 @@ export default function PizzaRush({ goHome }) {
         setRound(2)
         setRequired(5)
         setOrdersDone(0)
-        setTimer(15)
+        setTimer(20)
       } else {
         setWin(true)
         return
@@ -90,6 +93,7 @@ export default function PizzaRush({ goHome }) {
     setCurrent([])
   }
 
+  /* RETRY */
   function retry() {
     setRound(1)
     setRequired(3)
@@ -104,8 +108,12 @@ export default function PizzaRush({ goHome }) {
 
   return (
     <div className="pizza-wrapper">
-      <button className="back-btn" onClick={goHome}>← Back</button>
+      {/* BACK BUTTON */}
+      <button className="back-btn" onClick={goHome}>
+        ← Back
+      </button>
 
+      {/* HUD */}
       <div className="hud">
         <div>⏱ {timer}s</div>
         <div>🍕 {ordersDone} / {required}</div>
